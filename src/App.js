@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { BiBrightnessHalf, BiBrightness } from "react-icons/bi";
 import AppRouter from "./Router";
 import "./style/style.css";
-import { Helmet } from "react-helmet";
 
 const App = () => {
+  const [theme, setTheme] = useState("light");
+  const themeChange = () => {
+    if (theme === "light") setTheme("night");
+    else setTheme("light");
+  };
+
   return (
-    <>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>voca-web</title>
-      </Helmet>
+    <div className={theme}>
+      <div className="themeSelector" onClick={themeChange}>
+        {theme === "light" ? <BiBrightness /> : <BiBrightnessHalf />}
+      </div>
       <AppRouter />
-    </>
+    </div>
   );
 };
 
