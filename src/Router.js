@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import axios from "axios";
 import Landing from "./Router/Landing";
@@ -15,10 +15,10 @@ const AppRouter = () => {
       //console.log(res.data);
 
       let w = [];
-      res.data.map(i => {
+      res.data.forEach(i => {
         w.push([i.영어, i.한국어]);
       });
-      setWords(words);
+      setWords(w);
       setWordsLength(w.length);
     })
     .catch(err => {
@@ -34,7 +34,10 @@ const AppRouter = () => {
             <Landing wordsLength={wordsLength} item={item} setItem={setItem} />
           }
         />
-        <Route path="/card" element={<Card words={words} item={item} />} />
+        <Route
+          path="/card"
+          element={<Card words={words} item={item} wordsLength={wordsLength} />}
+        />
       </Routes>
     </Router>
   );

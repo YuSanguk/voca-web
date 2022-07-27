@@ -70,3 +70,50 @@ body {
   flex-wrap: wrap;
   gap: 16px;
 }
+
+.cardBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+}
+
+.wordCard {
+  border-radius: 16px;
+  width: 260px;
+  height: 370px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.light .wordCard {
+  border: rgba(0, 0, 0, 0.2) solid 2px;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.night .wordCard {
+  border: rgba(255, 255, 255, 0.2) solid 2px;
+  box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.cardButton {
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+}
+
+.cardButton *:nth-child(2) {
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardButton:first-child,
+.cardButton:last-child {
+  cursor: pointer;
+}
