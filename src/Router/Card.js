@@ -1,38 +1,45 @@
 import React, { useEffect, useState } from "react";
 import ReactCardFlip from "react-card-flip";
+import { BiFoodMenu } from "react-icons/bi";
 
 const Card = ({ words, item, wordsLength }) => {
+  // 현 위치, 카드 상태, 랜덤 순서화 진행, 단어 목록, 중복 확인용 숫자 배열
   const [pos, setPos] = useState(1);
   const [flip, setFlip] = useState(false);
   const [checker, setChecker] = useState(false);
-  const [wordsList, setWordsList] = useState([]);
+  const [wordsList, setWordsList] = useState([["a", "b"]]);
   const [usedNums, setUsedNums] = useState([]);
-  let wordList = [];
-  let usedNum = [];
+
+  const wording = () => {
+    let wordsArray = [];
+    for (let i = 0; i < item; i++) {
+      wordsArray.push([words[usedNums[i]][0], words[usedNums[i]][1]]);
+    }
+    setWordsList(wordsArray);
+    setChecker(true);
+    setFlip(false);
+    setPos(1);
+  };
 
   const numbering = () => {
-    let num = -1;
-
-    while (num !== -1 || usedNum.includes(num)) {
-      const ran = Math.random() * 100 * wordsLength;
-      num = ran % item;
+    let numberList = [];
+    while (numberList.length < item) {
+      let num = Math.floor(Math.random() * wordsLength);
+      if (num === item) num = num - 1;
+      if (!numberList.includes(num)) {
+        numberList.push(num);
+      }
     }
-
-    return num;
+    setUsedNums(numberList);
   };
 
   useEffect(() => {
-    if (item > 0) {
-      for (let i = 0; i < item; i++) {
-        const num = numbering();
-
-        usedNum.push(0);
-        wordList.push([words[num][0], words[num][1]]);
-      }
-      setWordsList(wordList);
-      setChecker(true);
-    }
+    numbering();
   }, []);
+
+  useEffect(() => {
+    if (usedNums.length >= item) wording();
+  }, [usedNums]);
 
   const goBack = () => {
     if (pos > 1) setPos(pos - 1);
@@ -52,10 +59,10 @@ const Card = ({ words, item, wordsLength }) => {
     <div className="cardBox">
       <ReactCardFlip isFlipped={flip} flipDirection="horizontal">
         <div className="wordCard" onClick={cardFlip}>
-          {checker ? wordsList[pos - 1][0] : "121"}
+          {checker ? wordsList[pos - 1][0] : "frondCard"}
         </div>
         <div className="wordCard" onClick={cardFlip}>
-          1
+          {checker ? wordsList[pos - 1][1] : "backCard"}
         </div>
       </ReactCardFlip>
       <div className="cardButton">
