@@ -12,8 +12,6 @@ const AppRouter = () => {
   axios
     .get(process.env.REACT_APP_NOTION)
     .then(res => {
-      //console.log(res.data);
-
       let w = [];
       res.data.forEach(i => {
         w.push([i.영어, i.한국어]);
@@ -22,6 +20,7 @@ const AppRouter = () => {
       setWordsLength(w.length);
     })
     .catch(err => {
+      console.log(process.env.REACT_APP_NOTION);
       console.log(err);
     });
 
