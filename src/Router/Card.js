@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ReactCardFlip from "react-card-flip";
-import { BiFoodMenu } from "react-icons/bi";
 
 const Card = ({ words, item, wordsLength }) => {
   // 현 위치, 카드 상태, 랜덤 순서화 진행, 단어 목록, 중복 확인용 숫자 배열

@@ -7,7 +7,7 @@ import Card from "./Router/Card";
 const AppRouter = () => {
   const [words, setWords] = useState();
   const [wordsLength, setWordsLength] = useState();
-  const [item, setItem] = useState(20);
+  const [item, setItem] = useState(0);
 
   axios
     .get(process.env.REACT_APP_NOTION)

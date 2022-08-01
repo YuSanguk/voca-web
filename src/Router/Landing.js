@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Landing = ({ wordsLength, item, setItem }) => {
@@ -10,14 +10,29 @@ const Landing = ({ wordsLength, item, setItem }) => {
     } else setItem(value);
   };
 
+  useEffect(() => {
+    document.querySelector(".chartPercent").style.transform = `rotate(${
+      (180 * item) / wordsLength
+    }deg)`;
+  }, [item]);
+
   return (
     <div className="landing">
-      <div>
-        <div></div>
-        <input onChange={inputSystem} value={item} type="number"></input>
-        <div>{wordsLength}</div>
+      <div className="chartBox">
+        <ul className="chart-skills">
+          <li className="chartPercent"></li>
+        </ul>
+        <input
+          onChange={inputSystem}
+          value={item}
+          type="text"
+          inputMode="numeric"
+        ></input>
+        <div>/ {wordsLength}</div>
       </div>
-      <Link to="/card">시작하기</Link>
+      <Link to="/card" className="startButton">
+        시작하기
+      </Link>
     </div>
   );
 };
