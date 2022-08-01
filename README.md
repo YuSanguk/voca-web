@@ -8,6 +8,12 @@
 - 간단하게 사용 가능
 - https://yusanguk.github.io/voca-web/
 
+### 노션 주소 api
+- https://github.com/splitbee/notion-api-worker
+
+### 본인만의 웹 단어장을 만드는 법
+- 해당 코드를 가져간 뒤, .env파일을 만들고 REACT_APP_NOTION = (노션주소) 를 추가 후 빌드하면 끝!
+
 ### 7월 22일
 - 프로젝트 생성
 - 노션 데이터 테이블에서 데이터를 가져오는 법 확인
