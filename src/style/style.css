@@ -176,6 +176,85 @@ body {
   gap: 100px;
 }
 
+.modeChanger {
+  font-size: 24px;
+  margin: 0;
+  padding: 6px;
+  position: fixed;
+  top: 16px;
+  display: flex;
+  border-radius: 6px;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.86;
+  transition: 0.3s;
+}
+
+.light .modeChanger:hover {
+  background-color: rgba(180, 180, 180, 0.95);
+  transition: 0.3s;
+}
+
+.night .modeChanger:hover {
+  background-color: rgba(220, 220, 220, 0.9);
+  transition: 0.3s;
+}
+
+.themeSelector * {
+  height: 25px;
+  width: 25px;
+}
+
+.tableBox {
+  padding: 4px;
+  width: 300px;
+  height: 580px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 20px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  gap: 0;
+}
+
+.tableBox .row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.light .tableBox .row {
+  border: solid 2px rgba(41, 41, 41, 0.5);
+}
+
+.night .tableBox .row {
+  border: solid 2px rgba(214, 214, 214, 0.5);
+}
+
+.light .tableBox .row *:last-child {
+  border-left: solid 2px rgba(41, 41, 41, 0.5);
+}
+
+.night .tableBox .row *:last-child {
+  border-left: solid 2px rgba(214, 214, 214, 0.5);
+}
+
+.tableBox .row * {
+  width: 50%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 .wordCard {
   border-radius: 16px;
   width: 260px;

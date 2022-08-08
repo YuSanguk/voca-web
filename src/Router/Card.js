@@ -1,13 +1,34 @@
 import React, { useEffect, useState } from "react";
 import ReactCardFlip from "react-card-flip";
+import { BiBorderAll, BiCalendarAlt } from "react-icons/bi";
 
 const Card = ({ words, item, wordsLength }) => {
   // 현 위치, 카드 상태, 랜덤 순서화 진행, 단어 목록, 중복 확인용 숫자 배열
+  const [mode, setMode] = useState(0); // 0 : 카드 모드 / 1 : 표 모드
+  const [iconState, setIconState] = useState(0); // 0 : 카드 / 1 : 표
   const [pos, setPos] = useState(1);
   const [flip, setFlip] = useState(false);
   const [checker, setChecker] = useState(false);
   const [wordsList, setWordsList] = useState([["a", "b"]]);
   const [usedNums, setUsedNums] = useState([]);
+
+  const modeChange = () => {
+    setMode(!mode);
+    setIconState(!iconState);
+  };
+
+  const toCard = ele => {
+    modeChange();
+    setFlip(false);
+    let it = 0;
+    for (let i = 0; i < wordsLength; i++) {
+      if (wordsList[i][0] === ele) {
+        it = i + 1;
+        break;
+      }
+    }
+    setPos(it);
+  };
 
   const wording = () => {
     let wordsArray = [];
@@ -42,12 +63,10 @@ const Card = ({ words, item, wordsLength }) => {
 
   const goBack = () => {
     if (pos > 1) setPos(pos - 1);
-    setFlip(false);
   };
 
   const goFront = () => {
     if (pos < item) setPos(pos + 1);
-    setFlip(false);
   };
 
   const cardFlip = () => {
@@ -55,23 +74,45 @@ const Card = ({ words, item, wordsLength }) => {
   };
 
   return (
-    <div className="cardBox">
-      <ReactCardFlip isFlipped={flip} flipDirection="horizontal">
-        <div className="wordCard" onClick={cardFlip}>
-          {checker ? wordsList[pos - 1][0] : "frondCard"}
-        </div>
-        <div className="wordCard" onClick={cardFlip}>
-          {checker ? wordsList[pos - 1][1] : "backCard"}
-        </div>
-      </ReactCardFlip>
-      <div className="cardButton">
-        <div onClick={goBack}>{"<"}</div>
-        <div>
-          {pos} / {item}
-        </div>
-        <div onClick={goFront}>{">"}</div>
+    <>
+      <div className="modeChanger" onClick={modeChange}>
+        {iconState ? <BiBorderAll /> : <BiCalendarAlt />}
       </div>
-    </div>
+      {mode ? (
+        <div className="tableBox">
+          {wordsList.map(ele => (
+            <div
+              key={ele[0]}
+              onClick={() => {
+                toCard(ele[0]);
+              }}
+              className="row"
+            >
+              <span>{ele[0]}</span>
+              <span>{ele[1]}</span>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="cardBox">
+          <ReactCardFlip isFlipped={flip} flipDirection="horizontal">
+            <div className="wordCard" onClick={cardFlip}>
+              {checker ? wordsList[pos - 1][0] : "frondCard"}
+            </div>
+            <div className="wordCard" onClick={cardFlip}>
+              {checker ? wordsList[pos - 1][1] : "backCard"}
+            </div>
+          </ReactCardFlip>
+          <div className="cardButton">
+            <div onClick={goBack}>{"<"}</div>
+            <div>
+              {pos} / {item}
+            </div>
+            <div onClick={goFront}>{">"}</div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
