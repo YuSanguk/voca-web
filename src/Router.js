@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import axios from "axios";
 import Landing from "./Router/Landing";
@@ -9,20 +9,22 @@ const AppRouter = () => {
   const [wordsLength, setWordsLength] = useState();
   const [item, setItem] = useState(1);
 
-  axios
-    .get(process.env.REACT_APP_NOTION)
-    .then(res => {
-      let w = [];
-      res.data.forEach(i => {
-        w.push([i.영어, i.한국어]);
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_NOTION)
+      .then(res => {
+        let w = [];
+        res.data.forEach(i => {
+          w.push([i.영어, i.한국어]);
+        });
+        setWords(w);
+        setWordsLength(w.length);
+      })
+      .catch(err => {
+        console.log(process.env.REACT_APP_NOTION);
+        console.log(err);
       });
-      setWords(w);
-      setWordsLength(w.length);
-    })
-    .catch(err => {
-      console.log(process.env.REACT_APP_NOTION);
-      console.log(err);
-    });
+  }, []);
 
   return (
     <Router>
