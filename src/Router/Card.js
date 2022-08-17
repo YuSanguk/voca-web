@@ -11,6 +11,11 @@ const Card = ({ words, item, wordsLength }) => {
   const [checker, setChecker] = useState(false);
   const [wordsList, setWordsList] = useState([["a", "b"]]);
   const [usedNums, setUsedNums] = useState([]);
+  const [language, setLanguage] = useState(0);
+
+  const languageChange = e => {
+    setLanguage(e.target.value);
+  };
 
   const modeChange = () => {
     setMode(!mode);
@@ -79,19 +84,35 @@ const Card = ({ words, item, wordsLength }) => {
         {iconState ? <BiBorderAll /> : <BiCalendarAlt />}
       </div>
       {mode ? (
-        <div className="tableBox">
-          {wordsList.map(ele => (
-            <div
-              key={ele[0]}
-              onClick={() => {
-                toCard(ele[0]);
-              }}
-              className="row"
-            >
-              <span>{ele[0]}</span>
-              <span>{ele[1]}</span>
-            </div>
-          ))}
+        <div className="table">
+          <div className="tableBox">
+            {wordsList.map(ele => (
+              <div
+                key={ele[0]}
+                onClick={() => {
+                  toCard(ele[0]);
+                }}
+                className="row"
+              >
+                <span className={`${language === "2" ? "invisible" : ""}`}>
+                  {ele[0]}
+                </span>
+                <span className={`${language === "1" ? "invisible" : ""}`}>
+                  {ele[1]}
+                </span>
+              </div>
+            ))}
+          </div>
+          <select
+            onChange={e => {
+              languageChange(e);
+            }}
+            className="language"
+          >
+            <option value="0">EN / KOR</option>
+            <option value="1">EN</option>
+            <option value="2">KOR</option>
+          </select>
         </div>
       ) : (
         <div className="cardBox">

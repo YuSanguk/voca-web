@@ -21,6 +21,10 @@ body {
   font-size: 16px;
 }
 
+.invisible {
+  color: rgba(220, 220, 220, 0);
+}
+
 .themeSelector {
   margin: 0;
   padding: 6px;
@@ -205,13 +209,43 @@ body {
   width: 25px;
 }
 
+.table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table .language {
+  border-radius: 4px;
+  border: none;
+  padding: 8px;
+  background: none;
+  font-size: 16px;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.table .language:hover {
+  transition: 0.3s;
+  background-color: rgba(211, 211, 211, 0.7);
+}
+
+.table .language option {
+  font-size: 12px;
+  text-align: center;
+  padding-left: 3px;
+}
+
 .tableBox {
   padding: 4px;
   width: 300px;
   height: 580px;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   font-size: 20px;
   flex-direction: column;
   flex-wrap: nowrap;

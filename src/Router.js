@@ -23,6 +23,10 @@ const AppRouter = () => {
       .catch(err => {
         console.log(process.env.REACT_APP_NOTION);
         console.log(err);
+        let w = [];
+        w.push(["test", "테스트"]);
+        setWords(w);
+        setWordsLength(w.length);
       });
   }, []);
 
